@@ -43,5 +43,10 @@ module.exports = {
         watchContentBase: true,
         contentBase: path.resolve(__dirname, 'dist'),
         open: true
-    }
+    },
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.js'
+        },
+    },
 }
