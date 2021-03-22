@@ -32,14 +32,15 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
-        login({ dispatch }, userData) {
+        authLogin({ dispatch }, userData) {
+            console.log('login method', userData);
             /**
              * TODO
              * do login
              * dispatch SET_USER
              */
         },
-        logout({ dispatch }, userData) {
+        authLogout({ dispatch }, userData) {
             /**
              * TODO
              * do logout
