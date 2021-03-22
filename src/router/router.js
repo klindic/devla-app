@@ -24,6 +24,11 @@ const routes = [
     }
 ];
 
+export const router = new VueRouter({
+    mode: 'history',
+    routes
+});
+
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!store.getters.isUserLoggedIn) {
@@ -34,9 +39,4 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-});
-
-export const router = new VueRouter({
-    mode: 'history',
-    routes
 });
