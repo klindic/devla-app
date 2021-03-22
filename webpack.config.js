@@ -1,14 +1,26 @@
-/** @type {import('webpack').Configuration} */
 const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
     module: {
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.(png|svg|jpg|gif|ico)$/,
+                use: ['file-loader?name=[name].[ext]']
+            },
             {
                 test: /\.css$/,
                 use: [
@@ -24,6 +36,9 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new VueLoaderPlugin
+    ],
     devServer: {
         watchContentBase: true,
         contentBase: path.resolve(__dirname, 'dist'),
