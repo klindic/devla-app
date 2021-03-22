@@ -36,7 +36,7 @@ export const store = new Vuex.Store({
             /**
              * TODO
              * do login
-             * dispatch REMOVE_USER
+             * dispatch SET_USER
              */
         },
         logout({ dispatch }, userData) {
