@@ -10,12 +10,17 @@ export const store = new Vuex.Store({
             isLoggedIn: false,
             firstName: '',
             lastName: '',
-            email: ''
+            email: '',
+            title: '',
+            shortCV: ''
         }
     },
     getters: {
         isUserLoggedIn: state => {
             return state.user.isLoggedIn;
+        },
+        user: state => {
+            return state.user;
         }
     },
     mutations: {
@@ -24,12 +29,16 @@ export const store = new Vuex.Store({
             state.user.firstName = userData.firstName;
             state.user.lastName = userData.lastName;
             state.user.email = userData.email;
+            state.user.title = userData.title;
+            state.user.shortCV = userData.shortCV;
         },
         REMOVE_USER(state) {
             state.user.isLoggedIn = false;
             state.user.firstName = '';
             state.user.lastName = '';
             state.user.email = '';
+            state.user.title = '';
+            state.user.shortCV = '';
         }
     },
     actions: {
@@ -42,7 +51,9 @@ export const store = new Vuex.Store({
                 const userData = {
                     firstName: currentUser.firstName,
                     lastName: currentUser.lastName,
-                    email: currentUser.email
+                    email: currentUser.email,
+                    title: currentUser.title,
+                    shortCV: currentUser.shortCV,
                 };
                 commit('SET_USER', userData);
                 return true;
@@ -50,11 +61,7 @@ export const store = new Vuex.Store({
             return false;
         },
         async authLogout({ commit }) {
-            /**
-             * TODO
-             * do logout
-             * dispatch REMOVE_USER
-             */
+            commit('REMOVE_USER');
         }
     }
 });
