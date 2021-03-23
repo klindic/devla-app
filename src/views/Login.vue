@@ -1,5 +1,8 @@
 <template>
-    <main class="flex justify-center h-screen items-center">
+    <main class="flex justify-center h-screen items-center flex-col">
+        <h1 class="text-2xl -mt-10 mb-10">
+            Enter your credentials
+        </h1>
         <form
         id="login"
         @submit.prevent="validate($event)"
