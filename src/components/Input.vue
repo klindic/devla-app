@@ -1,5 +1,5 @@
 <template functional>
-    <div class="relative h-12 input-component mb-5">
+    <div class="relative h-12 mb-5">
         <input
             :id="props.id"
             :type="props.type"
