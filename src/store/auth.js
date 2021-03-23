@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
-import * as authData from '../assets/json/auth.json';
+import { users } from '../assets/json/auth.json';
 
 Vue.use(Vuex);
 
@@ -43,7 +43,7 @@ export const store = new Vuex.Store({
     },
     actions: {
         async authLogin({ commit }, userData) {
-            const currentUser = authData.users.find(user => {
+            const currentUser = users.find(user => {
                 return user.email === userData.email &&
                     user.password === userData.password
             });
