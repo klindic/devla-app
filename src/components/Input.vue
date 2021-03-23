@@ -4,8 +4,8 @@
             :id="props.id"
             :type="props.type"
             :name="props.id"
-            class="h-full w-full border-gray-300 px-2 transition-all border-blue rounded-md text-black"/>
-        <label for="name" class="absolute left-2 transition-all bg-white px-1">
+            class="h-full w-full border border-gray-300 px-2 border-blue rounded-md text-black"/>
+        <label for="name" class="absolute left-2 text-xs bg-white px-1">
             {{ props.label }}
         </label>
     </div>
@@ -20,3 +20,16 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+label {
+  transform: translateY(-50%);
+  color: var(--primary-color)
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+</style>
