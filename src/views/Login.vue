@@ -8,7 +8,13 @@
         @submit.prevent="validate($event)"
         class="max-w-sm w-full h-64 justify-center bg-white shadow-md rounded-lg overflow-hidden mx-auto flex flex-col p-5">
             <Input id="email" label="Email" type="text"></Input>
-            <Input id="pass" label="Password" type="password"></Input>
+            <div v-if="errorMessage('email')" class="-mt-4 mb-3 text-sm text-red-600">
+                {{ errorMessage('email') }}
+            </div>
+            <Input id="password" label="Password" type="password"></Input>
+            <div v-if="errorMessage('password')" class="-mt-4 mb-3 text-sm text-red-600">
+                {{ errorMessage('password') }}
+            </div>
             <Button type="submit">Login</Button>
         </form>
     </main>
@@ -27,7 +33,7 @@ export default {
     },
     data() {
         return {
-            errorMessages: []
+            errors: []
         }
     },
     methods: {
@@ -35,8 +41,8 @@ export default {
             'authLogin'
         ]),
         async validate(event) {
-            const email = this.findFormElem(event, 'email');
-            const password = this.findFormElem(event, 'pass');
+            const email = this.findFormElem(event, 'email').trim();
+            const password = this.findFormElem(event, 'password').trim();
             if(this.isValid({email, password})) {
                 const userAuthenticated = await this.authLogin({email, password});
                 if (userAuthenticated) {this.$router.push('/')}
@@ -52,45 +58,21 @@ export default {
             return value;
         },
         isValid(userData) {
-            this.errorMessages = [];
+            this.errors = [];
             if (!userData.email) {
-                this.errorMessages.push('Email is required.');
+                this.errors.push({ field: 'email', message: 'Email is required.'});
             } else if (!isEmailValid(userData.email)) {
-                this.errorMessages.push('Email is not valid.')
+                this.errors.push({ field: 'email', message: 'Email is not valid.'})
             };
             if (!userData.password) {
-                this.errorMessages.push('Password is required.');
+                this.errors.push({ field: 'password', message: 'Password is required.'});
             };
-            return !Boolean(this.errorMessages.length);
+            return !Boolean(this.errors.length);
+        },
+        errorMessage(fieldName) {
+            const error = this.errors.find(error => error.field === fieldName);
+            if (error) return error.message;
         }
     }
 };
 </script>
-
-<style>
-label {
-  top: 0%;
-  transform: translateY(-50%);
-  font-size: 11px;
-  color: rgba(37, 99, 235, 1);
-}
-
-.empty input:not(:focus) + label {
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 14px;
-}
-
-input:not(:focus) + label {
-  color: rgba(70, 70, 70, 1);
-}
-
-input {
-  border-width: 1px;
-}
-
-input:focus {
-  outline: none;
-  border-color: rgba(37, 99, 235, 1);
-}
-</style>
