@@ -31,11 +31,12 @@ export default {
         ...mapActions([
             'authLogin'
         ]),
-        validate(event) {
+        async validate(event) {
             const email = this.findFormElem(event, 'email');
             const password = this.findFormElem(event, 'pass');
             if(this.isValid({email, password})) {
-                this.authLogin({email, password});
+                const userAuthenticated = await this.authLogin({email, password});
+                if (userAuthenticated) {this.$router.push('/')}
             }
         },
         findFormElem(event, name) {

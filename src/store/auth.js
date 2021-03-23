@@ -1,5 +1,6 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
+import * as authData from '../assets/json/auth.json';
 
 Vue.use(Vuex);
 
@@ -19,28 +20,36 @@ export const store = new Vuex.Store({
     },
     mutations: {
         SET_USER(state, userData) {
-            state.isLoggedIn = true;
-            state.firstName = userData.firstName;
-            state.lastName = userData.lastName;
-            state.email = userData.email;
+            state.user.isLoggedIn = true;
+            state.user.firstName = userData.firstName;
+            state.user.lastName = userData.lastName;
+            state.user.email = userData.email;
         },
         REMOVE_USER(state) {
-            state.isLoggedIn = false;
-            state.firstName = '';
-            state.lastName = '';
-            state.email = '';
+            state.user.isLoggedIn = false;
+            state.user.firstName = '';
+            state.user.lastName = '';
+            state.user.email = '';
         }
     },
     actions: {
-        authLogin({ dispatch }, userData) {
-            console.log('login method', userData);
-            /**
-             * TODO
-             * do login
-             * dispatch SET_USER
-             */
+        async authLogin({ commit }, userData) {
+            const currentUser = authData.users.find(user => {
+                return user.email === userData.email &&
+                    user.password === userData.password
+            });
+            if (currentUser) {
+                const userData = {
+                    firstName: currentUser.firstName,
+                    lastName: currentUser.lastName,
+                    email: currentUser.email
+                };
+                commit('SET_USER', userData);
+                return true;
+            }
+            return false;
         },
-        authLogout({ dispatch }, userData) {
+        async authLogout({ commit }) {
             /**
              * TODO
              * do logout

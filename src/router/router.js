@@ -30,12 +30,19 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
+        // route requires auth
         if (!store.getters.isUserLoggedIn) {
-            next('/login')
+            next('/login');
         } else {
             next();
         }
     } else {
-        next();
+        // this wasn't part of the task but did it anyways
+        if (store.getters.isUserLoggedIn) {
+            // route doesn't require auth but user logged in
+            next('/');
+        } else {
+            next();
+        }
     }
 });
