@@ -4,7 +4,7 @@
             :id="props.id"
             :type="props.type"
             :name="props.id"
-            class="h-full w-full border border-gray-300 px-2 border-blue rounded-md text-black"/>
+            class="h-full w-full border border-gray-300 px-2 border-blue rounded-md text-black" autocomplete="on"/>
         <label for="name" class="absolute left-2 text-xs bg-white px-1">
             {{ props.label }}
         </label>
