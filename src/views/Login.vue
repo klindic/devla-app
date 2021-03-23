@@ -15,6 +15,9 @@
             <div v-if="errorMessage('password')" class="-mt-4 mb-3 text-sm text-red-600">
                 {{ errorMessage('password') }}
             </div>
+            <div v-if="errorMessage('global')" class="-mt-4 mb-3 text-sm text-red-600">
+                {{ errorMessage('global') }}
+            </div>
             <Button type="submit">Login</Button>
         </form>
     </main>
@@ -45,7 +48,10 @@ export default {
             const password = this.findFormElem(event, 'password').trim();
             if(this.isValid({email, password})) {
                 const userAuthenticated = await this.authLogin({email, password});
-                if (userAuthenticated) {this.$router.push('/')}
+                if (userAuthenticated) {
+                    this.$router.push('/')
+                }
+                this.errors.push({ field: 'global', message: 'Email or password invalid.'})
             }
         },
         findFormElem(event, name) {
