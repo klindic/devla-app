@@ -1,5 +1,5 @@
 <template functional>
-    <button :type="props.type" class="w-full py-4 bg-green-500 text-center text-white rounded-md">
+    <button :type="props.type" class="w-full py-4 text-center text-white rounded-md">
         <slot/>
     </button>
 </template>
@@ -12,3 +12,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+  button {
+    background-color: var(--primary-color);
+  }
+</style>
