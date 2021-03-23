@@ -7,14 +7,8 @@
         id="login"
         @submit.prevent="validate($event)"
         class="max-w-sm w-full h-auto py-7 justify-center bg-white shadow-md rounded-lg overflow-hidden mx-auto flex flex-col p-5">
-            <Input id="email" label="Email" type="text"></Input>
-            <div v-if="errorMessage('email')" class="-mt-4 mb-3 text-sm text-red-600">
-                {{ errorMessage('email') }}
-            </div>
-            <Input id="password" label="Password" type="password"></Input>
-            <div v-if="errorMessage('password')" class="-mt-4 mb-3 text-sm text-red-600">
-                {{ errorMessage('password') }}
-            </div>
+            <Input id="email" label="Email" type="text" field="email"></Input>
+            <Input id="password" label="Password" type="password" field="password"></Input>
             <div v-if="errorMessage('global')" class="-mt-4 mb-3 text-sm text-red-600">
                 {{ errorMessage('global') }}
             </div>
