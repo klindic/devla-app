@@ -5,5 +5,5 @@
 - webpack 5
 - tailwind
 - postCSS
-- vue 2
-- vue functional components
+- vue.js 2
+- vue.js functional components
